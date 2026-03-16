@@ -1,0 +1,11 @@
+<project>
+ <modelVersion>4.0.0</modelVersion>
+
+ <groupId>com.company</groupId>
+ <artifactId>{{values.app_name}}</artifactId>
+ <version>1.0</version>
+
+ <dependencies>
+ </dependencies>
+
+</project>
