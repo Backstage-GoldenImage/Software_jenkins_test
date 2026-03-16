@@ -19,6 +19,13 @@ spec:
           type: string
           description: Provide a component (microservice) name
           pattern: '^([a-zA-Z][a-zA-Z0-9]*)(-[a-zA-Z0-9]+)*$'
+        language:
+          type: string
+          title: Programming Language
+          enum:
+            - node
+            - python
+            - java
         environment:
           title: Environment
           type: string
@@ -32,7 +39,7 @@ spec:
       name: Fetch Base Template
       action: fetch:template
       input:
-        url: ./template
+        url: ./template/${{ parameters.language }}
         values:
           app_name: ${{parameters.component_id}}
           app_env: ${{parameters.environment}}
