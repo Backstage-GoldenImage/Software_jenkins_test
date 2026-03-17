@@ -36,6 +36,14 @@ spec:
 
   steps:
     steps:
+    - id: fetch-base
+      name: Fetch Base Template
+      action: fetch:template
+      input:
+        url: ./template/${{ parameters.language }}
+        values:
+          app_name: ${{parameters.component_id}}
+          app_env: ${{parameters.environment}}
 
     - id: fetch-lang
       action: fetch:template
