@@ -35,6 +35,24 @@ spec:
             - prod
 
   steps:
+    steps:
+
+    - id: fetch-lang
+      action: fetch:template
+      input:
+        url: ./template/skeleton/${{ parameters.language }}
+        targetPath: ./
+        values:
+          app_name: ${{parameters.component_id}}
+
+    - id: fetch-common
+      action: fetch:template
+      input:
+        url: ./template/common
+        targetPath: ./
+        values:
+          app_name: ${{parameters.component_id}}
+          
     - id: fetch-base
       name: Fetch Base Template
       action: fetch:template

@@ -25,11 +25,10 @@ metadata:
   description: Multi-language service ${{values.app_name}}
 
   annotations:
-    github.com/project-slug: BackstageSSPPoC/${{values.app_name}}
+    github.com/project-slug: Backstage-GoldenImage/${{values.app_name}}
     backstage.io/techdocs-ref: dir:.
 
     jenkins.io/job-full-name: ${{values.app_name}}
-
     argocd/app-name: ${{values.app_name}}
 
     backstage.io/kubernetes-id: ${{values.app_name}}
