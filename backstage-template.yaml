@@ -40,7 +40,7 @@ spec:
       name: Fetch Base Template
       action: fetch:template
       input:
-        url: ./template/${{ parameters.language }}
+        url: ./template
         values:
           app_name: ${{parameters.component_id}}
           app_env: ${{parameters.environment}}
