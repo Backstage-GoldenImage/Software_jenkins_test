@@ -57,8 +57,8 @@ spec:
       name: Register in Catalog
       action: catalog:register
       input:
-        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
-        catalogInfoPath: "/catalog-info.yaml"
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: /catalog-info.yaml
 
     - id: create-k8s-folder
       name: Create K8s Artifact Folder
