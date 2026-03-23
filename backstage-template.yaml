@@ -19,13 +19,6 @@ spec:
           type: string
           description: Provide a component (microservice) name
           pattern: '^([a-zA-Z][a-zA-Z0-9]*)(-[a-zA-Z0-9]+)*$'
-        language:
-          type: string
-          title: Programming Language
-          enum:
-            - node
-            - python
-            - java
         environment:
           title: Environment
           type: string
@@ -35,7 +28,6 @@ spec:
             - prod
 
   steps:
-    steps:
     - id: fetch-base
       name: Fetch Base Template
       action: fetch:template
@@ -58,14 +50,14 @@ spec:
       name: Register in Catalog
       action: catalog:register
       input:
-        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-        catalogInfoPath: catalog-info.yaml
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: "/catalog-info.yaml"
 
     - id: create-k8s-folder
-      name: Create K8s Artifact Folder
+      name: Create K8s Manifest Folder
       action: publish:github:pull-request
       input:
-        repoUrl: github.com?owner=Backstage-GoldenImage&repo=k8s-artifact
+        repoUrl: github.com?owner=Backstage-GoldenImage&repo=k8s-manifests
         branchName: create-${{ parameters.component_id }}
         title: "Add manifests for ${{ parameters.component_id }}"
         description: "This PR creates Kubernetes manifests for ${{ parameters.component_id }}"
@@ -75,8 +67,4 @@ spec:
   output:
     links:
       - title: Repository
-
         url: ${{ steps['publish'].output.remoteUrl }}
-
-
-
