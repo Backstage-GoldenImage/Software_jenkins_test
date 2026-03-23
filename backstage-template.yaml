@@ -54,13 +54,13 @@ spec:
         catalogInfoPath: "/catalog-info.yaml"
 
     - id: create-k8s-folder
-      name: Create K8s Manifest Folder
+      name: Create K8s Artifact Folder
       action: publish:github:pull-request
       input:
-        repoUrl: github.com?owner=Backstage-GoldenImage&repo=k8s-manifests
+        repoUrl: github.com?owner=Backstage-GoldenImage&repo=k8s-artifact
         branchName: create-${{ parameters.component_id }}
-        title: "Add manifests for ${{ parameters.component_id }}"
-        description: "This PR creates Kubernetes manifests for ${{ parameters.component_id }}"
+        title: "Add artifact for ${{ parameters.component_id }}"
+        description: "This PR creates Kubernetes artifact for ${{ parameters.component_id }}"
         sourcePath: ./manifest-templates
         targetPath: apps/${{ parameters.component_id }}
 
