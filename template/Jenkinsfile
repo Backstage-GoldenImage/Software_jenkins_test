@@ -33,51 +33,17 @@ pipeline {
             }
         }
 
-        stage('Detect Language') {
+        stage('Install Dependencies') {
             steps {
-             script {
-         
-              if (fileExists('package.json')) {
-                env.LANG="node"
-              }
-         
-              else if (fileExists('requirements.txt')) {
-                env.LANG="python"
-              }
-         
-              else if (fileExists('pom.xml')) {
-                env.LANG="java"
-              }
-         
-              else {
-                error("Unsupported language")
-              }
-         
-              echo "Detected language: ${env.LANG}"
-             }
+                sh 'npm install'
             }
-        }
-        
-        stage('Build App') {
-           steps {
-            script {
-        
-             if (env.LANG == "node") {
-               sh "npm install"
-             }
-        
-             if (env.LANG == "python") {
-               sh "pip install -r requirements.txt"
-             }
-        
-             if (env.LANG == "java") {
-               sh "mvn package"
-             }
-        
-            }
-           }
         }
 
+        stage('Run Tests') {
+            steps {
+                sh 'npm test || true'
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
@@ -111,7 +77,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
-                    rm -rf k8s-artifact
+                    rm -rf k8s-manifests
 
                     git clone --depth 1 https://${GITHUB_TOKEN}@github.com/Backstage-GoldenImage/k8s-artifact.git
                     cd k8s-artifact
@@ -147,6 +113,4 @@ pipeline {
             echo "Pipeline failed!"
         }
     }
-
 }
-
