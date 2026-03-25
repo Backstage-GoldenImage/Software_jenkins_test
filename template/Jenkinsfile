@@ -93,6 +93,7 @@ pipeline {
                     git config user.name "jenkins"
 
                     git add .
+                    git pull origin main --rebase
                     git commit -m "Deploy ${APP_NAME} build ${BUILD_NUMBER}" || true
                     git push origin main
                     '''
