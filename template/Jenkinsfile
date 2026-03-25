@@ -94,7 +94,7 @@ pipeline {
 
                     git add .
                     git pull origin main --rebase
-                    git commit -m "Deploy ${APP_NAME} build ${BUILD_NUMBER}" || true
+                    git commit -m "Deploy ${APP_NAME} build ${BUILD_NUMBER} || echo "No changes to commit"
                     git push origin main
                     '''
                 }
